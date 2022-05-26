@@ -1,5 +1,5 @@
 #  Created by Bogdan Trif on 2022.05.25 , 4:44 PM ; btrif
-from flask import request
+from flask import request, render_template
 
 from settings import *
 
@@ -7,7 +7,8 @@ from settings import *
 ####         Routes         #####
 @app.route('/')
 def index():
-    return 'Hello there'
+    return render_template('index.html' )
+    return {"status": "success" , "message" : "This is the Parking Car Flask API" }
 
 
 @app.route('/available_places')
@@ -38,7 +39,15 @@ def add_car():  # in browser URL : http://127.0.0.1:7000/add?car_number=CJ45WAY&
 
     # Check that the tariff is only hourly or daily :
     if tariff not in ['hourly', 'daily']:
-        raise NameError('the INPUT must be either hourly or daily')
+        raise NameError('the tariff must be either hourly or daily')
+
+    # Check whether a car_number is alphanumeric
+    if not str(car_number).isalnum() :
+        raise  NameError('the car_number must be compose only of letters and digits')
+
+    # Also to note here that for further checks we must use a URL Validator as if one types :
+    # http://127.0.0.1:7000/add?car_number=CT33M&OM&tariff=hourly a car will be added because
+    #  &OM string will be ignored as it is undefined. and the car_number=CT33M will be added instead
 
     # Check if there are enough available places in the Parking :
     if Settings.available_places > 0:

@@ -37,8 +37,8 @@ class Settings():
     parking_capacity: int = 12
     hourly_tariff: int = 1
     daily_tariff: int = 10
-    current_car_number: int = Parking.query.count()
-    available_places: int = parking_capacity - current_car_number
+    current_car_number: int = None
+    available_places: int = None
 
 
 ####        Additional functions        ####

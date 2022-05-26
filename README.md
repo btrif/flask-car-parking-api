@@ -34,8 +34,10 @@ SQLAlchemy as ORM.
 (.parking_venv) D:\workspace\oracle-car-parking>set FLASK_APP=app
 ```
 ###  Setup Database
-You can use the existing Database created and which comes with the app
-or you can set up a new one as follows
+You can use the existing Database created and which comes with the app.
+Or you can set up a new empty one as follows 
+( Please note that it must be done before application was started):
+
 
 Open the Python console of the virtual env start a python session
 
@@ -59,7 +61,11 @@ When you access in web browser:
 ```http://localhost:port```
 should open the index of the app with a help to use the API.
 
-## Docker alternative
+### Settings
+Parking Settings are hold within the Settings class
+where you can change parking capacity and also the daily or hourly tariffs.
+
+# Docker alternative
 If you have installed Docker locally on you machine you can do the following
 in the root folder of the application :
 
@@ -68,10 +74,10 @@ D:\workspace\oracle-car-parking>docker build -t oracle-car-parking:latest
 D:\workspace\oracle-car-parking>docker run -p 7000:7000 oracle-car-parking-flask
 ```
 
-and you can already use in the same way the Application API. 
-
-```bash
+and you can already use in the same way the host machine web browser  Application API.
 You should get something like this :
+```bash
+
 * Serving Flask app 'settings' (lazy loading)
 * Environment: production
   WARNING: This is a development server. Do not use it in a production deployment.

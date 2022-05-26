@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>the Parking Car Flask API</title>
+</head>
+<body>
+<h1>
+    <center>The Parking Car Flask API Specifications</center>
+</h1>
+
+<table>
+    <thead>
+    <td class="table_head">Action</td>
+    <td class="table_head">URL</td>
+    <td class="table_head"> Description</td>
+    </thead>
+
+    <tr>
+        <td>Help</td>
+        <td> http://127.0.0.1:7000/</td>
+        <td> Get this help page</td>
+    </tr>
+
+    <tr>
+        <td>List with parked cars</td>
+        <td> http://127.0.0.1:7000/cars</td>
+        <td> Lists all the cars which are currently parked</td>
+    </tr>
+
+    <tr>
+        <td>Add a car</td>
+        <td> http://127.0.0.1:7000/add?car_number=CJ45WAY&tariff=hourly</td>
+        <td>Example, where : car_number = CJ45WAY ; tariff = hourly or daily. Please do not use for car_number "&" as there
+            is no URL validator implented</td>
+    </tr>
+
+    <tr>
+        <td>Remove a car</td>
+        <td> http://127.0.0.1:7000/remove/id</td>
+        <td> where id is the parking id place allocated. You can find a specific id by listing cars</td>
+    </tr>
+
+    <tr>
+        <td>Get available places</td>
+        <td> http://127.0.0.1:7000/available_places</td>
+        <td> How many available places are currently available</td>
+    </tr>
+</table>
+
+
+<style>
+/*		Tables	    */
+
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+
+
+table {
+border-collapse: collapse;
+border-spacing: 0;
+width: 100%;
+}
+
+
+td {
+vertical-align: top;
+border: 1px solid #ddd;
+padding: 2px;
+text-align: left;
+}
+
+thead {
+font-weight: bold;
+text-align: center;
+}
+
+.table_head {
+font-weight: bold;
+text-align: center;
+}
+
+/* END Tables  */
+</style>
+
+</body>
+</html>
+
