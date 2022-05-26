@@ -1,0 +1,4 @@
+# Ignore the virtual environment
+.api_venv/
+__pycache__/
+.idea/
