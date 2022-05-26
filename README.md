@@ -34,13 +34,18 @@ SQLAlchemy as ORM.
 (.parking_venv) D:\workspace\oracle-car-parking>set FLASK_APP=app
 ```
 ###  Setup Database
-You can use the existing Database created and which comes with the app.
-Or you can set up a new empty one as follows 
-( Please note that it must be done before application was started):
+- You can use the existing Database created and which comes with the app.
 
+or
 
-Open the Python console of the virtual env start a python session
+- If however you want to set up a new empty DB, please note that it must be done before application is started.
+You must first delete the existing parking.db.
 
+```bash
+del parking.db           (Windows)
+rm -f parking.db           (Linux)
+```
+and then start a python session using the .parking_venv virtual env
 ```bash
 (.parking_venv) D:\workspace\oracle-car-parking>python
 Python 3.9.6 (tags/v3.9.6:db3ff76
