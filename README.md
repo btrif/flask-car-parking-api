@@ -66,6 +66,7 @@ Parking Settings are hold within the Settings class
 where you can change parking capacity and also the daily or hourly tariffs.
 
 # Docker alternative
+####Advantage : You can completely ignore the setup from above. This will be done automatically for you by Docker.
 If you have installed Docker locally on you machine you can do the following
 in the root folder of the application :
 
