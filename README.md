@@ -77,10 +77,10 @@ in the root folder of the application :
 
 ```bash
 D:\workspace\oracle-car-parking>docker build -t oracle-car-parking:latest
-D:\workspace\oracle-car-parking>docker run -p 7000:7000 oracle-car-parking-flask
+D:\workspace\oracle-car-parking>docker run -p 7000:7000 oracle-car-parking
 ```
 
-and you can already use in the same way the host machine web browser  Application API.
+Now  you can already use in the same way the host machine Web Browser Application API.
 You should get something like this :
 ```bash
 
