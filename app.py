@@ -4,6 +4,7 @@ from settings import *
 from routes import index, list_cars, add_car, delete_car, parking_places
 
 
+
 if __name__ == '__main__':
     current_car_number = Parking.query.count()
     Settings.current_car_number = current_car_number

@@ -12,7 +12,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///parking.db'
 db = SQLAlchemy(app)
 datetime_format = '%Y-%m-%d %H:%M:%S'
 
-
 ###   Custom error handler for 404
 @app.errorhandler(404)
 def resource_not_found(e):

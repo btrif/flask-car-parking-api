@@ -3,7 +3,6 @@ from flask import request, render_template
 
 from settings import *
 
-
 ####         Routes         #####
 @app.route('/')
 def index():
