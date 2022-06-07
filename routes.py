@@ -7,8 +7,8 @@ from settings import *
 ####         Routes         #####
 @app.route('/')
 def index():
-    return render_template('index.html' )
-    return {"status": "success" , "message" : "This is the Parking Car Flask API" }
+    return render_template('index.html')
+    return {"status": "success", "message": "This is the Parking Car Flask API"}
 
 
 @app.route('/available_places')
@@ -20,11 +20,9 @@ def parking_places():
 def list_cars():
     cars = Parking.query.all()
     list_of_cars = []
-
     for car in cars:
         car_Data = {'id': car.id, 'car_number': car.car_number, 'tariff': car.tariff, 'date_start': str(car.date_start)}
         list_of_cars.append(car_Data)
-
     if cars:
         return jsonify({'cars': list_of_cars})
     else:
@@ -42,8 +40,8 @@ def add_car():  # in browser URL : http://127.0.0.1:7000/add?car_number=CJ45WAY&
         raise NameError('the tariff must be either hourly or daily')
 
     # Check whether a car_number is alphanumeric
-    if not str(car_number).isalnum() :
-        raise  NameError('the car_number must be compose only of letters and digits')
+    if not str(car_number).isalnum():
+        raise NameError('the car_number must be compose only of letters and digits')
 
     # Also to note here that for further checks we must use a URL Validator as if one types :
     # http://127.0.0.1:7000/add?car_number=CT33M&OM&tariff=hourly a car will be added because
@@ -56,7 +54,7 @@ def add_car():  # in browser URL : http://127.0.0.1:7000/add?car_number=CJ45WAY&
         try:
             db.session.add(new_car)
             db.session.commit()
-            Settings.available_places -= 1      # Update available places
+            Settings.available_places -= 1  # Update available places
             return {'status': 'success', 'id': new_car.id, 'car_number': new_car.car_number,
                     'tariff': new_car.tariff, 'date_start': new_car.date_start,
                     'available_places': Settings.available_places}

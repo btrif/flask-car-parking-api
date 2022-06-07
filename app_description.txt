@@ -1,0 +1,41 @@
+Please, design and automate parking lot service with three operations:
+
+        Add a car
+        Remove a car
+        Lists the parked cars
+
+Requirements:
+
+        On entrance, the driver selects a tariff plan (e.g., hourly or daily) at the ticket machine to print the ticket.
+        On exit, the station calculates the fee and prints a receipt for a driver. The first 15 minutes are free for all tariff plans.
+        Must design implementation to be tolerant of tariff plan changes.
+        Service should be implemented as a REST web service with three GET operations that returns a JSON content type, e.g.:
+
+    http://host:port/add?car=X774HY98&tariff=hourly
+    {"status": "success", "car": "X774HY98", "tariff": "hourly", "location": 12, "start": "2014-10-01 14:11:45"} <-- info to print ticket for driver on entrance.
+
+    http://host:port/add?car=X774HY98&tariff=daily
+    {"status": "error", "No free space"} <-- info to show on display of ticket machine for driver.
+
+    http://host:port/remove?location=12
+    {"status": "success", "start": "2014-10-01 14:11:45", "finish": "2014-10-01 14:21:57", "location": 12, "car": "X774HY98", "fee": 0, "tariff": "hourly"} <-- info to print receipt for driver on exit.
+
+    http://host:port/list
+    {"status": "success", "cars" : [
+       {"car": "X774HY98", "tariff": "hourly", "location": 1, "start": "2014-10-01 14:11:45"},
+        {"car": "X637TT98", "tariff": "daily", "location": 2, "start": "2014-10-01 15:23:05"}
+    ] } <-- info for parking administrator.
+
+    Note:
+    This is just an example so feel free to change the format if required.
+
+        Neither database, front-end, nor hibernation aren't required, unless you could demonstrate something interesting for a reasonable time.
+        Design an object-oriented abstraction on problem-solving.
+        Provide good error reporting.
+        Ideal implementation is not required but must work for basic cases.
+
+Once a first usable version is ready to be published, please
+
+        Upload it to https://github.com or https://gitlab.com
+        Create feature branch and pull/merge request to be able to review it.
+        Make repository public

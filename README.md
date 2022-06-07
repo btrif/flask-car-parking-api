@@ -76,7 +76,7 @@ If you have installed Docker locally on you machine you can do the following
 in the root folder of the application :
 
 ```bash
-D:\workspace\oracle-car-parking>docker build -t oracle-car-parking:latest
+D:\workspace\oracle-car-parking>docker build . -t oracle-car-parking:latest
 D:\workspace\oracle-car-parking>docker run -p 7000:7000 oracle-car-parking
 ```
 
