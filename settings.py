@@ -35,8 +35,8 @@ class Parking(db.Model):
 class Settings():
     ''' The Parking Settings. You can modify here for customizations '''
     parking_capacity: int = 12
-    hourly_tariff: int = 1
-    daily_tariff: int = 10
+    hourly_tariff: int = 10
+    daily_tariff: int = 1
     current_car_number: int = None
     available_places: int = None
 
