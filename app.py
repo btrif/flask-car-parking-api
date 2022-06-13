@@ -1,6 +1,7 @@
 #  Created by Bogdan Trif on 2022.05.24 , 11:52 AM ; btrif
 
-from settings import *
+from config import *
+from models import Parking, app
 from routes import index, list_cars, add_car, delete_car, parking_places
 
 if __name__ == '__main__':

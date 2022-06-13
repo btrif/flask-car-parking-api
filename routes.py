@@ -1,10 +1,13 @@
 #  Created by Bogdan Trif on 2022.05.25 , 4:44 PM ; btrif
 from flask import request, render_template
-
-from settings import *
-
+from config import *
+from models import app, Parking, db
+from utilities import *
+from datetime import datetime
 
 ####         Routes         #####
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -26,7 +29,7 @@ def list_cars():
         list_of_cars.append(car_Data)
 
     if cars:
-        return jsonify({'cars': list_of_cars})
+        return {'status': 'success', 'cars': list_of_cars}
     else:
         return {'status': 'error', 'message': "You don't have any cars in your parking lot. Just add some cars"}
 
@@ -38,13 +41,16 @@ def add_car():  # in browser URL : http://127.0.0.1:7000/add?car_number=CJ45WAY&
     tariff = request.args.get('tariff')
 
     # Check if there is no car in the parking with the same car_number:
-    existing_car_number_count = Parking.query.filter_by(car_number=new_car_number).count()
-    if existing_car_number_count > 0:
-        return {'status': 'error', 'message': 'Hey! There is already a car with that number. I will call the Police !'}
+    existing_car_number = Parking.query.filter_by(car_number=new_car_number)
+    if existing_car_number.count() > 0:     # Here we suppose that only one park may already exist within park. Not multiple
+        date_start = Parking.query.filter_by(car_number='CT33M').all()[0].date_start
+        position = Parking.query.filter_by(car_number='CT33M').all()[0].id
+        return {'status': 'error', 'message': f"There is already a parked car with this number since {date_start}"
+                                              f". It can be found at the position {position}"}
 
     # Check that the tariff is only hourly or daily :
     if tariff not in ['hourly', 'daily']:
-        return {'status': 'error', 'message': 'the tariff must be either hourly or daily'}
+        return {'status': 'error', 'message': f"{tariff} is not a Tariff Plan. tariff must be either `hourly` or `daily`"}
 
     # Check whether a new_car_number is alphanumeric
     if not str(new_car_number).isalnum():
@@ -66,15 +72,15 @@ def add_car():  # in browser URL : http://127.0.0.1:7000/add?car_number=CJ45WAY&
                     'tariff': new_car.tariff, 'date_start': new_car.date_start,
                     'available_places': Settings.available_places}
         except Exception:
-            return 'there was an error adding your car'
+            return {'status': 'error', 'message': 'The car was not added. Connection problem with the database.'}
 
     else:
         return {'status': 'error', 'message': 'The Parking is FULL. Please come back later !'}
 
 
-@app.route('/remove/<int:id>', methods=['GET', 'DELETE', 'POST'])
+@app.route('/remove/<int:id>', methods=['GET', 'DELETE'])
 def delete_car(id):
-    car = Parking.query.get_or_404(id)
+    car = Parking.query.get(id)
     if car:
         try:
             db.session.delete(car)
@@ -93,4 +99,4 @@ def delete_car(id):
             return {'status': 'error', 'message': f"there was an error removing your car with id {car.id}"}
 
     else:
-        return {'status': 'error', 'message': f'this car id={car.id} does not exist'}
+        return {'status': 'error', 'message': f'The car with id {id} does not exist in the Parking'}
