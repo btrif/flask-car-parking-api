@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parking Configuration</title>
+</head>
+<body>
+
+<h2>Configure parking settings</h2>
+
+<form action="{{ url_for('configuration') }}" method="post">
+<label for="hourly_tariff">Hourly Tariff:</label>
+<input type="text" id="hourly_tariff" name="hourly" placeholder= "1.23" pattern="[0-9]{1}.[0-9]{1,2}" ><br>
+<label for="daily_tariff">Daily Tariff:</label>
+<input type="text" id="daily_tariff" name="daily" placeholder= "12.34"pattern="[0-9]{1,3}.[0-9]{1,2}"> <br><br>
+<button type="submit">Update</button>
+
+
+
+<style>
+
+body {
+background-color: #ffffe6;
+margin: 155;
+font-size: 1.0em;
+line-height: 1.4;
+}
+
+.role_title {
+background-color : #;
+font-weight : bold ;
+text-align : center-left-side ;
+margin: 10px 10px 5px 10px ;	/* UP, RIGHT, DOWN, LEFT   */
+}
+
+</style>
+
+
+</body>
+</html>

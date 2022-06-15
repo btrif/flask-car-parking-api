@@ -12,3 +12,6 @@ class Settings():
     current_car_number: int = None
     available_places: int = None
 
+
+HOST = '0.0.0.0'
+PORT = 7000

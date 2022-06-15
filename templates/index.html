@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>the Parking Car Flask API</title>
+    <title>Parking Car Flask API</title>
 </head>
+
 <body>
 <h1>
     <center>The Parking Car Flask API Specifications</center>
@@ -30,7 +31,14 @@
 
     <tr>
         <td>Add a car</td>
-        <td> http://127.0.0.1:7000/add?car_number=CJ45WAY&tariff=hourly</td>
+        <td><a href="http://127.0.0.1:7000/add?car_number=CJ45WAY&tariff=hourly">
+            http://127.0.0.1:7000/add?car_number=CJ45WAY&tariff=hourly</a></td>
+        {%  block container %}
+            {% for i in range(5) %}
+
+            {% endfor %}
+        {%  endblock %}
+
         <td>Example, where : car_number = CJ45WAY ; tariff = hourly or daily. Please do not use for car_number "&" as there
             is no URL validator implented</td>
     </tr>
@@ -83,6 +91,22 @@ text-align: center;
 }
 
 /* END Tables  */
+
+
+body {
+background-color: #ffffe6;
+margin: 155;
+font-size: 1.0em;
+line-height: 1.4;
+}
+
+.role_title {
+background-color : #;
+font-weight : bold ;
+text-align : center-left-side ;
+margin: 10px 10px 5px 10px ;	/* UP, RIGHT, DOWN, LEFT   */
+}
+
 </style>
 
 </body>

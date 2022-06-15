@@ -1,0 +1,11 @@
+{
+  "parking_info": {
+    "hourly_tariff": 1,
+    "daily_tariff": 10,
+    "parking_capacity": 12
+  },
+  "server_settings": {
+    "HOST": "127.0.0.1",
+    "PORT": "7000"
+  }
+}

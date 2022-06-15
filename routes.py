@@ -1,5 +1,7 @@
 #  Created by Bogdan Trif on 2022.05.25 , 4:44 PM ; btrif
 from flask import request, render_template
+
+import config
 from config import *
 from models import app, Parking, db
 from utilities import *
@@ -100,3 +102,38 @@ def delete_car(id):
 
     else:
         return {'status': 'error', 'message': f'The car with id {id} does not exist in the Parking'}
+
+
+
+@app.route('/configuration', methods=['GET', 'POST'])
+def configuration():
+
+    if request.method == "POST":
+        # getting input with name = hourly in HTML form
+        hourly_tariff = request.form.get("hourly")
+        # getting input with name = daily in HTML form
+        daily_tariff = request.form.get("daily")
+        # Update the Settings dataclass
+        if hourly_tariff and daily_tariff :
+            config.Settings.hourly_tariff = hourly_tariff
+            config.Settings.daily_tariff = daily_tariff
+            return {"status":"success", "message": f"hourly_tariff tariff was updated to {hourly_tariff} and daily tariff was updated to {daily_tariff}"}
+        else :
+            {"status":"error", "message": f"You must input integer or float"}
+    return render_template("configuration.html")
+
+
+
+@app.route('/hello/<user>')
+def hello_world(user=None):
+    user = user or 'Shalabh'
+    return '''
+    <html>
+        <head>
+            <title>Templating in Flask</title>
+        </head>
+        <body>
+            <h1>Hello %s!</h1>
+            <p>Welcome to the world of Flask!</p>
+        </body>
+    </html>''' % user

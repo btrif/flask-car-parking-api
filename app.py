@@ -13,4 +13,4 @@ if __name__ == '__main__':
     current_car_number = Parking.query.count()
     Settings.current_car_number = current_car_number
     Settings.available_places = Settings.parking_capacity - current_car_number
-    app.run(debug=True, host='0.0.0.0', port=7000, use_reloader=True)
+    app.run(debug=True, host=HOST, port=PORT, use_reloader=True)
