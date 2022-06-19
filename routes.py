@@ -12,6 +12,7 @@ def index():
     return render_template('index.html')
 
 
+
 @app.route('/parking_info')
 def parking_places():
     parking_info = get_parking_configuration()
@@ -25,11 +26,9 @@ def parking_places():
 def list_cars():
     cars = Parking.query.all()
     list_of_cars = []
-
     for car in cars:
         car_Data = {'id': car.id, 'car_number': car.car_number, 'tariff': car.tariff, 'date_start': str(car.date_start)}
         list_of_cars.append(car_Data)
-
     if cars:
         return {'status': 'success', 'cars': list_of_cars}
     else:
@@ -55,9 +54,11 @@ def add_car():  # in browser URL : http://127.0.0.1:7000/add?car_number=CJ45WAY&
         return {'status': 'error',
                 'message': f"{tariff} is not a Tariff Plan. tariff must be either `hourly` or `daily`"}
 
+
     # Check whether a new_car_number is alphanumeric
     if not str(new_car_number).isalnum():
         raise {'status': 'error', 'message': 'the new_car_number must be compose only of letters and digits'}
+
 
     # Also to note here that for further checks we must use a URL Validator as if one types :
     # http://127.0.0.1:7000/add?car_number=CT33M&OM&tariff=hourly a car will be added because

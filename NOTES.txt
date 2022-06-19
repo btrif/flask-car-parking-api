@@ -1,0 +1,195 @@
+from app import Parking
+
+Parking.query.all()
+[< Car 3.  CT33MOM  hourly  2022-05-26 19:27:36.343914 >, < Car 4.  CT33M  hourly  2022-05-26 19:27:43.987338 >, < Car 5.  CT33M  hourly  2022-05-26 19:27:52.373296 >, < Car 6.  CT33M  hourly  2022-05-26 19:31:13.291347 >, < Car 7.  MS65  hourly  2022-05-26 19:32:25.134540 >, < Car 8.  MS65ZSD  hourly  2022-05-26 19:34:06.305046 >, < Car 9.  MM65ZSD  hourly  2022-05-26 19:48:22.440122 >, < Car 10.  VN15RER  daily  2022-05-26 19:48:39.688633 >, < Car 11.  BZ71EER  daily  2022-05-26 19:48:52.019137 >, < Car 12.  MM71EER  daily  2022-05-26 19:48:56.720765 >, < Car 13.  CJ71EER  daily  2022-05-26 19:49:00.476475 >, < Car 14.  CJ71TTTT  daily  2022-05-26 19:49:09.137817 >]
+
+Parking.query.filter_by('id')
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+TypeError: filter_by() takes 1 positional argument but 2 were given
+
+Parking.query.filter_by('id' = 4)
+  File "<input>", line 1
+    Parking.query.filter_by('id' = 4)
+                            ^
+SyntaxError: expression cannot contain assignment, perhaps you meant "=="?
+
+Parking.query.filter_by('id' == 4)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+TypeError: filter_by() takes 1 positional argument but 2 were given
+
+Parking.query.filter_by('id' == 14)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+TypeError: filter_by() takes 1 positional argument but 2 were given
+
+Parking.query.filter_by(id=10)
+<flask_sqlalchemy.BaseQuery object at 0x000001E4670C35B0>
+
+Parking.query.filter_by(id=10).all()
+[< Car 10.  VN15RER  daily  2022-05-26 19:48:39.688633 >]
+
+Parking.query.filter_by(tariff = 'daily').all()
+[< Car 10.  VN15RER  daily  2022-05-26 19:48:39.688633 >, < Car 11.  BZ71EER  daily  2022-05-26 19:48:52.019137 >, < Car 12.  MM71EER  daily  2022-05-26 19:48:56.720765 >, < Car 13.  CJ71EER  daily  2022-05-26 19:49:00.476475 >, < Car 14.  CJ71TTTT  daily  2022-05-26 19:49:09.137817 >]
+Parking.query.filter()
+<flask_sqlalchemy.BaseQuery object at 0x000001E4670C3430>
+
+Parking.query.filter().all()
+[< Car 3.  CT33MOM  hourly  2022-05-26 19:27:36.343914 >, < Car 4.  CT33M  hourly  2022-05-26 19:27:43.987338 >, < Car 5.  CT33M  hourly  2022-05-26 19:27:52.373296 >, < Car 6.  CT33M  hourly  2022-05-26 19:31:13.291347 >, < Car 7.  MS65  hourly  2022-05-26 19:32:25.134540 >, < Car 8.  MS65ZSD  hourly  2022-05-26 19:34:06.305046 >, < Car 9.  MM65ZSD  hourly  2022-05-26 19:48:22.440122 >, < Car 10.  VN15RER  daily  2022-05-26 19:48:39.688633 >, < Car 11.  BZ71EER  daily  2022-05-26 19:48:52.019137 >, < Car 12.  MM71EER  daily  2022-05-26 19:48:56.720765 >, < Car 13.  CJ71EER  daily  2022-05-26 19:49:00.476475 >, < Car 14.  CJ71TTTT  daily  2022-05-26 19:49:09.137817 >]
+
+Parking.query.filter(id>10)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+TypeError: '>' not supported between instances of 'builtin_function_or_method' and 'int'
+
+Parking.query.filter(id , id>10)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+TypeError: '>' not supported between instances of 'builtin_function_or_method' and 'int'
+
+Parking.query.filter(id , id =10)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+TypeError: filter() got an unexpected keyword argument 'id'
+Parking.query.filter(Parking.id )
+<flask_sqlalchemy.BaseQuery object at 0x000001E4670B9310>
+print(Parking.query.filter(Parking.id ))
+SELECT parking.id AS parking_id, parking.car_number AS parking_car_number, parking.tariff AS parking_tariff, parking.date_start AS parking_date_start
+FROM parking
+WHERE parking.id
+print(Parking.query.filter(Parking.id =10 ))
+  File "<input>", line 1
+    print(Parking.query.filter(Parking.id =10 ))
+                               ^
+SyntaxError: expression cannot contain assignment, perhaps you meant "=="?
+print(Parking.query.filter(Parking.id ))
+SELECT parking.id AS parking_id, parking.car_number AS parking_car_number, parking.tariff AS parking_tariff, parking.date_start AS parking_date_start
+FROM parking
+WHERE parking.id
+
+
+
+print(Parking.query.filter(Parking.id ))
+SELECT parking.id AS parking_id, parking.car_number AS parking_car_number, parking.tariff AS parking_tariff, parking.date_start AS parking_date_start
+FROM parking
+WHERE parking.id
+Parking.query.order_by(id)
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "<string>", line 2, in order_by
+  File "D:\workspace\btrif\oracle-car-parking\.parking_venv\lib\site-packages\sqlalchemy\sql\base.py", line 110, in _generative
+    x = fn(self, *args, **kw)
+  File "<string>", line 2, in order_by
+  File "D:\workspace\btrif\oracle-car-parking\.parking_venv\lib\site-packages\sqlalchemy\orm\base.py", line 230, in generate
+    fn(self, *args[1:], **kw)
+  File "D:\workspace\btrif\oracle-car-parking\.parking_venv\lib\site-packages\sqlalchemy\orm\query.py", line 1839, in order_by
+    criterion = tuple(
+  File "D:\workspace\btrif\oracle-car-parking\.parking_venv\lib\site-packages\sqlalchemy\orm\query.py", line 1840, in <genexpr>
+    coercions.expect(roles.OrderByRole, clause)
+  File "D:\workspace\btrif\oracle-car-parking\.parking_venv\lib\site-packages\sqlalchemy\sql\coercions.py", line 188, in expect
+    resolved = impl._literal_coercion(
+  File "D:\workspace\btrif\oracle-car-parking\.parking_venv\lib\site-packages\sqlalchemy\sql\coercions.py", line 401, in _literal_coercion
+    self._raise_for_expected(element, argname)
+  File "D:\workspace\btrif\oracle-car-parking\.parking_venv\lib\site-packages\sqlalchemy\sql\coercions.py", line 283, in _raise_for_expected
+    util.raise_(exc.ArgumentError(msg, code=code), replace_context=err)
+  File "D:\workspace\btrif\oracle-car-parking\.parking_venv\lib\site-packages\sqlalchemy\util\compat.py", line 207, in raise_
+    raise exception
+sqlalchemy.exc.ArgumentError: ORDER BY expression expected, got <built-in function id>.
+
+Parking.query.order_by(Parking.id)
+<flask_sqlalchemy.BaseQuery object at 0x000001E466EF9B80>
+
+Parking.query.order_by(Parking.id).all()
+[< Car 3.  CT33MOM  hourly  2022-05-26 19:27:36.343914 >, < Car 4.  CT33M  hourly  2022-05-26 19:27:43.987338 >, < Car 5.  CT33M  hourly  2022-05-26 19:27:52.373296 >, < Car 6.  CT33M  hourly  2022-05-26 19:31:13.291347 >, < Car 7.  MS65  hourly  2022-05-26 19:32:25.134540 >, < Car 8.  MS65ZSD  hourly  2022-05-26 19:34:06.305046 >, < Car 9.  MM65ZSD  hourly  2022-05-26 19:48:22.440122 >, < Car 10.  VN15RER  daily  2022-05-26 19:48:39.688633 >, < Car 11.  BZ71EER  daily  2022-05-26 19:48:52.019137 >, < Car 12.  MM71EER  daily  2022-05-26 19:48:56.720765 >, < Car 13.  CJ71EER  daily  2022-05-26 19:49:00.476475 >, < Car 14.  CJ71TTTT  daily  2022-05-26 19:49:09.137817 >]
+
+Parking.query.order_by(Parking.id).limit(10)
+<flask_sqlalchemy.BaseQuery object at 0x000001E466F60FA0>
+
+Parking.query.order_by(Parking.id).limit(10).all()
+[< Car 3.  CT33MOM  hourly  2022-05-26 19:27:36.343914 >, < Car 4.  CT33M  hourly  2022-05-26 19:27:43.987338 >, < Car 5.  CT33M  hourly  2022-05-26 19:27:52.373296 >, < Car 6.  CT33M  hourly  2022-05-26 19:31:13.291347 >, < Car 7.  MS65  hourly  2022-05-26 19:32:25.134540 >, < Car 8.  MS65ZSD  hourly  2022-05-26 19:34:06.305046 >, < Car 9.  MM65ZSD  hourly  2022-05-26 19:48:22.440122 >, < Car 10.  VN15RER  daily  2022-05-26 19:48:39.688633 >, < Car 11.  BZ71EER  daily  2022-05-26 19:48:52.019137 >, < Car 12.  MM71EER  daily  2022-05-26 19:48:56.720765 >]
+
+Parking.query.order_by(Parking.id).limit(2).all()
+[< Car 3.  CT33MOM  hourly  2022-05-26 19:27:36.343914 >, < Car 4.  CT33M  hourly  2022-05-26 19:27:43.987338 >]
+
+Parking.query.filter(Parking.id ==10 )
+<flask_sqlalchemy.BaseQuery object at 0x000001E466F50C70>
+
+Parking.query.filter(Parking.id ==10 ).all()
+[< Car 10.  VN15RER  daily  2022-05-26 19:48:39.688633 >]
+
+Parking.query.filter(Parking.id < 10 ).all()
+[< Car 3.  CT33MOM  hourly  2022-05-26 19:27:36.343914 >, < Car 4.  CT33M  hourly  2022-05-26 19:27:43.987338 >, < Car 5.  CT33M  hourly  2022-05-26 19:27:52.373296 >, < Car 6.  CT33M  hourly  2022-05-26 19:31:13.291347 >, < Car 7.  MS65  hourly  2022-05-26 19:32:25.134540 >, < Car 8.  MS65ZSD  hourly  2022-05-26 19:34:06.305046 >, < Car 9.  MM65ZSD  hourly  2022-05-26 19:48:22.440122 >]
+
+Parking.query.filter(10 < Parking.id < 10 ).all()
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+  File "D:\workspace\btrif\oracle-car-parking\.parking_venv\lib\site-packages\sqlalchemy\sql\elements.py", line 3901, in __bool__
+    raise TypeError("Boolean value of this clause is not defined")
+TypeError: Boolean value of this clause is not defined
+
+Parking.query.filter(Parking.id >= 10, Parking.id<15).all()
+[< Car 10.  VN15RER  daily  2022-05-26 19:48:39.688633 >, < Car 11.  BZ71EER  daily  2022-05-26 19:48:52.019137 >, < Car 12.  MM71EER  daily  2022-05-26 19:48:56.720765 >, < Car 13.  CJ71EER  daily  2022-05-26 19:49:00.476475 >, < Car 14.  CJ71TTTT  daily  2022-05-26 19:49:09.137817 >]
+
+Parking.query.filter(Parking.id >= 10, Parking.id<15)
+<flask_sqlalchemy.BaseQuery object at 0x000001E4670B97F0>
+
+Parking.query.filter(Parking.id >= 10, Parking.id<15).all()
+[< Car 10.  VN15RER  daily  2022-05-26 19:48:39.688633 >, < Car 11.  BZ71EER  daily  2022-05-26 19:48:52.019137 >, < Car 12.  MM71EER  daily  2022-05-26 19:48:56.720765 >, < Car 13.  CJ71EER  daily  2022-05-26 19:49:00.476475 >, < Car 14.  CJ71TTTT  daily  2022-05-26 19:49:09.137817 >]
+
+print(Parking.query.filter(Parking.id >= 10, Parking.id<15).all())
+[< Car 10.  VN15RER  daily  2022-05-26 19:48:39.688633 >, < Car 11.  BZ71EER  daily  2022-05-26 19:48:52.019137 >, < Car 12.  MM71EER  daily  2022-05-26 19:48:56.720765 >, < Car 13.  CJ71EER  daily  2022-05-26 19:49:00.476475 >, < Car 14.  CJ71TTTT  daily  2022-05-26 19:49:09.137817 >]
+
+print(Parking.query.filter(Parking.id >= 10, Parking.id<15))
+SELECT parking.id AS parking_id, parking.car_number AS parking_car_number, parking.tariff AS parking_tariff, parking.date_start AS parking_date_start
+FROM parking
+WHERE parking.id >= ? AND parking.id < ?
+
+print(Parking.query.filter(Parking.id >= 0, Parking.id<5))
+SELECT parking.id AS parking_id, parking.car_number AS parking_car_number, parking.tariff AS parking_tariff, parking.date_start AS parking_date_start
+FROM parking
+WHERE parking.id >= ? AND parking.id < ?
+
+Parking.query.filter(Parking.id >= 0, Parking.id<5)
+<flask_sqlalchemy.BaseQuery object at 0x000001E466F601C0>
+
+Parking.query.filter(Parking.id >= 0, Parking.id<5).all()
+[< Car 3.  CT33MOM  hourly  2022-05-26 19:27:36.343914 >, < Car 4.  CT33M  hourly  2022-05-26 19:27:43.987338 >]
+
+Parking.query.limit(Parking.id=5)
+  File "<input>", line 1
+    Parking.query.limit(Parking.id=5)
+                        ^
+SyntaxError: expression cannot contain assignment, perhaps you meant "=="?
+
+Parking.query.limit(5)
+<flask_sqlalchemy.BaseQuery object at 0x000001E4670B9FD0>
+
+Parking.query.limit(5).all()
+[< Car 3.  CT33MOM  hourly  2022-05-26 19:27:36.343914 >, < Car 4.  CT33M  hourly  2022-05-26 19:27:43.987338 >, < Car 5.  CT33M  hourly  2022-05-26 19:27:52.373296 >, < Car 6.  CT33M  hourly  2022-05-26 19:31:13.291347 >, < Car 7.  MS65  hourly  2022-05-26 19:32:25.134540 >]
+
+print(Parking.query.limit(5).all())
+[< Car 3.  CT33MOM  hourly  2022-05-26 19:27:36.343914 >, < Car 4.  CT33M  hourly  2022-05-26 19:27:43.987338 >, < Car 5.  CT33M  hourly  2022-05-26 19:27:52.373296 >, < Car 6.  CT33M  hourly  2022-05-26 19:31:13.291347 >, < Car 7.  MS65  hourly  2022-05-26 19:32:25.134540 >]
+
+print(Parking.query.limit(5))
+SELECT parking.id AS parking_id, parking.car_number AS parking_car_number, parking.tariff AS parking_tariff, parking.date_start AS parking_date_start
+FROM parking
+ LIMIT ? OFFSET ?
+
+Parking.query.limit(5).offset(5).all()
+[< Car 8.  MS65ZSD  hourly  2022-05-26 19:34:06.305046 >, < Car 9.  MM65ZSD  hourly  2022-05-26 19:48:22.440122 >, < Car 10.  VN15RER  daily  2022-05-26 19:48:39.688633 >, < Car 11.  BZ71EER  daily  2022-05-26 19:48:52.019137 >, < Car 12.  MM71EER  daily  2022-05-26 19:48:56.720765 >]
+
+Parking.query.limit(5).offset(0).all()
+[< Car 3.  CT33MOM  hourly  2022-05-26 19:27:36.343914 >, < Car 4.  CT33M  hourly  2022-05-26 19:27:43.987338 >, < Car 5.  CT33M  hourly  2022-05-26 19:27:52.373296 >, < Car 6.  CT33M  hourly  2022-05-26 19:31:13.291347 >, < Car 7.  MS65  hourly  2022-05-26 19:32:25.134540 >]
+
+Parking.query.limit(5).offset(15).all()
+[]
+
+Parking.query.limit(5).offset(10).all()
+[< Car 13.  CJ71EER  daily  2022-05-26 19:49:00.476475 >, < Car 14.  CJ71TTTT  daily  2022-05-26 19:49:09.137817 >]
+
+Parking.query.limit(5).offset(5).all()
+[< Car 8.  MS65ZSD  hourly  2022-05-26 19:34:06.305046 >, < Car 9.  MM65ZSD  hourly  2022-05-26 19:48:22.440122 >, < Car 10.  VN15RER  daily  2022-05-26 19:48:39.688633 >, < Car 11.  BZ71EER  daily  2022-05-26 19:48:52.019137 >, < Car 12.  MM71EER  daily  2022-05-26 19:48:56.720765 >]
+
+Parking.query.count()
+12

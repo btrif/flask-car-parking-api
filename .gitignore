@@ -2,4 +2,5 @@
 .api_venv/
 __pycache__/
 .idea/
-.parking_venv
+.parking_venv/
+
