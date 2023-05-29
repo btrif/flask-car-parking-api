@@ -1,6 +1,6 @@
 #  Created by Bogdan Trif on 2022.05.25 , 4:44 PM ; btrif
 from flask import request, render_template
-from models import app, Parking, db
+from models import app, Parking, db, datetime_format
 from utilities import *
 from datetime import datetime
 
@@ -35,13 +35,14 @@ def list_cars():
         return {'status': 'error', 'message': "You don't have any cars in your parking lot. Just add some cars"}
 
 
-
+# https://www.geeksforgeeks.org/python-using-for-loop-in-flask/
 @app.route('/cars2')
 def list_cars2():
     cars = Parking.query.all()
     list_of_cars = []
     for car in cars:
-        car_Data = {'id': car.id, 'car_number': car.car_number, 'tariff': car.tariff, 'date_start': str(car.date_start)}
+        nice_date_start = car.date_start.strftime(datetime_format)
+        car_Data = {'id': car.id, 'car_number': car.car_number, 'tariff': car.tariff, 'date_start': str(nice_date_start)}
         list_of_cars.append(car_Data)
     if cars:
 

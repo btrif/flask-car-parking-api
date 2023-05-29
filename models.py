@@ -11,6 +11,8 @@ db = SQLAlchemy(app)
 datetime_format = '%Y-%m-%d %H:%M:%S'
 
 
+
+
 ###      The DB Model of the Parking holding the cars       ####
 class Parking(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
@@ -26,3 +28,8 @@ class Parking(db.Model):
 @app.errorhandler(404)
 def resource_not_found(e):
     return jsonify(error=str(e)), 404
+
+
+# This initiates the creates the DB and makes the correspondiong tables - Ceea ce lipsea
+with app.app_context():
+    db.create_all()
