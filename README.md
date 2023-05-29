@@ -51,7 +51,7 @@ and then start a python session using the .parking_venv virtual env
 Python 3.9.6 (tags/v3.9.6:db3ff76
 ```
 ```python
->>> from app import db
+>>> from models import db
 >>> db.create_all()
 ```
 

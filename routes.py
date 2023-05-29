@@ -35,6 +35,24 @@ def list_cars():
         return {'status': 'error', 'message': "You don't have any cars in your parking lot. Just add some cars"}
 
 
+
+@app.route('/cars2')
+def list_cars2():
+    cars = Parking.query.all()
+    list_of_cars = []
+    for car in cars:
+        car_Data = {'id': car.id, 'car_number': car.car_number, 'tariff': car.tariff, 'date_start': str(car.date_start)}
+        list_of_cars.append(car_Data)
+    if cars:
+
+        return render_template("car_list.html", list_of_cars = list_of_cars)
+    else:
+        return {'status': 'error', 'message': "You don't have any cars in your parking lot. Just add some cars"}
+
+
+
+
+
 @app.route('/add', methods=['GET', 'POST'])
 def add_car():  # in browser URL : http://127.0.0.1:7000/add?car_number=CJ45WAY&tariff=hourly
 
