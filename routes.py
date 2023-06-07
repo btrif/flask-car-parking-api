@@ -5,6 +5,21 @@ from utilities import *
 from datetime import datetime
 
 
+PC = ParkingConfiguration('config.json')
+parking_info = PC.config_dict["parking_info"]
+
+
+#Compute available places :
+def get_parking_available_places(parking_info):
+    # from config JSON
+    cars_in_parking = Parking.query.count()
+    parking_capacity = parking_info['parking_capacity']
+    print(f"cars_in_parking capacity : {cars_in_parking}")
+    available_spaces = int(parking_capacity) - cars_in_parking
+
+    return available_spaces
+
+
 ####         Routes         #####
 
 @app.route('/')
@@ -15,11 +30,11 @@ def index():
 
 @app.route('/parking_info')
 def parking_places():
-    parking_info = get_parking_configuration()
-    print(f"parking_info --> {parking_info}")
-    available_places = int(parking_info['parking_capacity']) - Parking.query.count()
-    return {'parking_capacity': parking_info['parking_capacity'], 'available_places': available_places,
-            'hourly_tariff': parking_info['hourly_tariff'], 'daily_tariff': parking_info['daily_tariff']}
+    available_places = get_parking_available_places(parking_info)
+    return {'parking_capacity': parking_info['parking_capacity'],
+            'available_places': available_places,
+            'hourly_tariff': parking_info['hourly_tariff'],
+            'daily_tariff': parking_info['daily_tariff']}
 
 
 @app.route('/cars')
@@ -84,15 +99,15 @@ def add_car():  # in browser URL : http://127.0.0.1:7000/add?car_number=CJ45WAY&
     #  &OM string will be ignored as it is undefined. and the new_car_number=CT33M will be added instead
 
     # Check if there are enough available places in the Parking :
-    parking_info = get_parking_configuration()
-    available_places = int(parking_info['parking_capacity']) - Parking.query.count()
+    available_places = get_parking_available_places(parking_info)
+
     if available_places > 0:
         # Form the object of the car :
         new_car = Parking(car_number=new_car_number, tariff=tariff)
         try:
             db.session.add(new_car)
             db.session.commit()
-            available_places -= 1  # Update available places
+            available_places -= 1       # Update available places
             return {'status': 'success', 'id': new_car.id, 'new_car_number': new_car.car_number,
                     'tariff': new_car.tariff, 'date_start': new_car.date_start,
                     'available_places': available_places}
@@ -116,7 +131,7 @@ def delete_car(id):
             # Compute Fee
             fee = compute_fee(car.tariff, float(parking_info[car.tariff + '_tariff']), seconds)
             # Update available places, one place is available
-            available_places = int(parking_info['parking_capacity']) - Parking.query.count() + 1
+            available_places = get_parking_available_places(parking_info) + 1
 
             return {'status': 'success', 'message': {'id': car.id,
                                                      'car_number': car.car_number,
@@ -146,7 +161,6 @@ def configuration():
         parking_capacity = request.form.get("capacity")
         # Update the json configuration file
         if hourly_tariff and daily_tariff and parking_capacity:
-            PC = ParkingConfiguration('config.json')
             config = PC.config_dict
             config['parking_info']['hourly_tariff'] = hourly_tariff
             config['parking_info']['daily_tariff'] = daily_tariff

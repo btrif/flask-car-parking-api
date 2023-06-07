@@ -31,10 +31,10 @@ def compute_fee(tariff_type, tariff_value, seconds):
 class ParkingConfiguration():
     def __init__(self, config_file):
         self.config_file = config_file
-        self.config_dict = self.load_parking_configuration()
+        self.config_dict = self.read_parking_configuration()
 
 
-    def load_parking_configuration(self):
+    def read_parking_configuration(self):
         with open(self.config_file) as json_file:
             data = json.load(json_file)
             # Print the type of data variable
